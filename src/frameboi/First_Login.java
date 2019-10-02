@@ -45,7 +45,7 @@ First_Login_Page f_l_p = new First_Login_Page();
             }
         });
         jPanel2.add(jButton1);
-        jButton1.setBounds(30, 100, 79, 25);
+        jButton1.setBounds(30, 100, 120, 30);
 
         jButton2.setText("Admin");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -54,18 +54,18 @@ First_Login_Page f_l_p = new First_Login_Page();
             }
         });
         jPanel2.add(jButton2);
-        jButton2.setBounds(30, 180, 80, 25);
+        jButton2.setBounds(30, 180, 120, 30);
 
-        jButton3.setText("Third");
+        jButton3.setText("Leaderboard");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
         jPanel2.add(jButton3);
-        jButton3.setBounds(30, 270, 80, 25);
+        jButton3.setBounds(30, 270, 120, 30);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\anant\\Desktop\\door1.jpg")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("/home/aakash/FrameBoi/src/frameboi/door1.jpg")); // NOI18N
         jPanel2.add(jLabel1);
         jLabel1.setBounds(0, 0, 660, 420);
 
@@ -95,7 +95,9 @@ First_Login_Page f_l_p = new First_Login_Page();
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        f_l_p.setVisible(true);
+        leaderboard_page frm = new leaderboard_page();
+        frm.show();
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

@@ -179,11 +179,6 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="trophy">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="E:\Downloads\trophy.png"/>
-            </Property>
-          </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="trophyMouseClicked"/>
           </Events>
@@ -228,7 +223,7 @@
         <Component class="javax.swing.JLabel" name="Background">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="E:\Downloads\dragonTreasure(1).jpg"/>
+              <Image iconType="2" name="/home/aakash/FrameBoi/src/frameboi/dragonTreasure(1).jpg"/>
             </Property>
           </Properties>
           <Constraints>

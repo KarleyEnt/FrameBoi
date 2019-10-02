@@ -35,6 +35,7 @@ public class First_Easy_Level extends javax.swing.JFrame {
     
     int CoinsL = 2, KeyL = 1, HBL = 1;
     
+    
     public First_Easy_Level() {
         initComponents();
 
@@ -45,12 +46,15 @@ public class First_Easy_Level extends javax.swing.JFrame {
             {
                 if(i==100 || itemsLeft == 0)
                 {
+                    score_page frm = new score_page();
+                    String uname = First_Login_Page.getUsername();
+                    frm.calculateScore(timer_field.getText(),ScoreV,uname,"Easy");
                     timer.cancel();
                     timer.purge();
                 }
                 else{
                     i++;
-                    jTextField1.setText(Integer.toString(i));
+                    timer_field.setText(Integer.toString(i));
                     Time_Bar.setValue(i);
                     if(ScoreV==0)
                     {
@@ -84,7 +88,7 @@ public class First_Easy_Level extends javax.swing.JFrame {
         Solution = new javax.swing.JButton();
         Hint = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        timer_field = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         Score_Text = new javax.swing.JTextField();
@@ -131,15 +135,15 @@ public class First_Easy_Level extends javax.swing.JFrame {
         jPanel2.add(jButton3);
         jButton3.setBounds(580, 10, 70, 30);
 
-        jTextField1.setText("Timer");
-        jTextField1.setName("timer_one"); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        timer_field.setText("Timer");
+        timer_field.setName("timer_one"); // NOI18N
+        timer_field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                timer_fieldActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField1);
-        jTextField1.setBounds(310, 10, 70, 30);
+        jPanel2.add(timer_field);
+        timer_field.setBounds(310, 10, 70, 30);
 
         jLabel2.setText("Time Elapsed :");
         jPanel2.add(jLabel2);
@@ -171,7 +175,7 @@ public class First_Easy_Level extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Key);
-        Key.setBounds(580, 350, 20, 30);
+        Key.setBounds(590, 360, 20, 30);
 
         Coins_Two.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frameboi/coins(1).png"))); // NOI18N
         Coins_Two.setName("Coins_Two"); // NOI18N
@@ -205,7 +209,7 @@ public class First_Easy_Level extends javax.swing.JFrame {
         jPanel1.add(H_Bag);
         H_Bag.setBounds(310, 200, 64, 70);
 
-        Background.setIcon(new javax.swing.ImageIcon("C:\\Users\\anant\\Desktop\\Images\\mystery_easy.jpg")); // NOI18N
+        Background.setIcon(new javax.swing.ImageIcon("/home/aakash/FrameBoi/src/frameboi/mystery_easy.jpg")); // NOI18N
         jPanel1.add(Background);
         Background.setBounds(0, 60, 650, 420);
 
@@ -265,9 +269,9 @@ public class First_Easy_Level extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void timer_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timer_fieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_timer_fieldActionPerformed
 
     private void H_BagMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H_BagMouseClicked
         // TODO add your handling code here:
@@ -390,6 +394,6 @@ public class First_Easy_Level extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField timer_field;
     // End of variables declaration//GEN-END:variables
 }

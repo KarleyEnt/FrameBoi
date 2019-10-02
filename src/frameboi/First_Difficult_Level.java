@@ -59,7 +59,7 @@ public class First_Difficult_Level extends javax.swing.JFrame {
             }
         });
         jPanel2.add(Solution);
-        Solution.setBounds(10, 10, 79, 30);
+        Solution.setBounds(10, 10, 69, 30);
 
         Hint.setText("Hint");
         Hint.addActionListener(new java.awt.event.ActionListener() {
@@ -121,14 +121,13 @@ public class First_Difficult_Level extends javax.swing.JFrame {
         jPanel1.add(Key);
         Key.setBounds(220, 380, 20, 30);
 
-        trophy.setIcon(new javax.swing.ImageIcon("E:\\Downloads\\trophy.png")); // NOI18N
         trophy.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 trophyMouseClicked(evt);
             }
         });
         jPanel1.add(trophy);
-        trophy.setBounds(570, 280, 64, 50);
+        trophy.setBounds(570, 280, 0, 50);
 
         Coins_Two.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frameboi/coins(1).png"))); // NOI18N
         Coins_Two.setName("Coins_Two"); // NOI18N
@@ -150,7 +149,7 @@ public class First_Difficult_Level extends javax.swing.JFrame {
         jPanel1.add(Coins);
         Coins.setBounds(170, 450, 16, 16);
 
-        Background.setIcon(new javax.swing.ImageIcon("E:\\Downloads\\dragonTreasure(1).jpg")); // NOI18N
+        Background.setIcon(new javax.swing.ImageIcon("/home/aakash/FrameBoi/src/frameboi/dragonTreasure(1).jpg")); // NOI18N
         jPanel1.add(Background);
         Background.setBounds(0, 60, 650, 420);
 

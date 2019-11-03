@@ -67,7 +67,7 @@ First_Login_Page f_l_p = new First_Login_Page();
 
         jLabel1.setIcon(new javax.swing.ImageIcon("/home/aakash/FrameBoi/src/frameboi/door1.jpg")); // NOI18N
         jPanel2.add(jLabel1);
-        jLabel1.setBounds(0, 0, 660, 420);
+        jLabel1.setBounds(140, 70, 660, 420);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,7 +90,9 @@ First_Login_Page f_l_p = new First_Login_Page();
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        
         f_l_p.setVisible(true);
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

@@ -194,7 +194,8 @@ public class First_Login_Page extends javax.swing.JFrame {
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
         // TODO add your handling code here:
-        
+        //System.out.println(getClass().getResource("/frameboi/door1.jpg"));
+
         Register_page frm = new Register_page();
         frm.show();
         this.hide();

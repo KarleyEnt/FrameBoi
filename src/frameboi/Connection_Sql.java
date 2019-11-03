@@ -19,7 +19,7 @@ public class Connection_Sql {
         Connection con = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/spykey", "Aakash", "Hector1234");
+            con = DriverManager.getConnection("jdbc:mysql://" + "ec2-13-59-254-127.us-east-2.compute.amazonaws.com" + ":"+ "3306/SpyKey", "rup", "password");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

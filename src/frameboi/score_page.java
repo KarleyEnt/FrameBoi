@@ -26,7 +26,7 @@ public class score_page {
         try {
             ps = Connection_Sql.getConnection().prepareStatement(query);
             
-            ps.setString(1, username);
+            ps.setString(1, "chinnu");
             ps.setInt(2, score);
             ps.setString(3, time);
             

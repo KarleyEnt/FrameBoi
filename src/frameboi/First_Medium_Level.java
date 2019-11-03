@@ -339,8 +339,8 @@ public class First_Medium_Level extends javax.swing.JFrame {
         Imgproc.rectangle(source, matchLoc, new Point(matchLoc.x + template.cols(),
                 matchLoc.y + template.rows()), new Scalar(255, 255, 255));
  
-//        Imgcodecs.imwrite(filePath+"sonuc.jpg", source);
-//        System.out.println("Complated.");
+        Imgcodecs.imwrite(filePath+"sonuc.jpg", source);
+        System.out.println("Complated.");
     }//GEN-LAST:event_HintActionPerformed
 
     private void SolutionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SolutionActionPerformed

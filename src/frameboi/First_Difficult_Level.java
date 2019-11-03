@@ -23,7 +23,7 @@ public class First_Difficult_Level extends javax.swing.JFrame {
      * Creates new form First_Difficult_Level
      */
     
-    int i = 0,itemsLeft = 4, ScoreV = 100;
+    int i = 0,itemsLeft = 6, ScoreV = 100;
     
     First_Login f_l = new First_Login();
     

@@ -45,7 +45,7 @@ First_Login_Page f_l_p = new First_Login_Page();
             }
         });
         jPanel2.add(jButton1);
-        jButton1.setBounds(30, 100, 120, 30);
+        jButton1.setBounds(30, 100, 140, 30);
 
         jButton2.setText("Admin");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -54,7 +54,7 @@ First_Login_Page f_l_p = new First_Login_Page();
             }
         });
         jPanel2.add(jButton2);
-        jButton2.setBounds(30, 180, 120, 30);
+        jButton2.setBounds(30, 180, 140, 30);
 
         jButton3.setText("Leaderboard");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -63,7 +63,7 @@ First_Login_Page f_l_p = new First_Login_Page();
             }
         });
         jPanel2.add(jButton3);
-        jButton3.setBounds(30, 270, 120, 30);
+        jButton3.setBounds(30, 270, 150, 30);
 
         jLabel1.setIcon(new javax.swing.ImageIcon("/home/aakash/FrameBoi/src/frameboi/door1.jpg")); // NOI18N
         jPanel2.add(jLabel1);

@@ -28,30 +28,47 @@ public class First_Difficulty extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        Hard = new javax.swing.JLabel();
+        Easy = new javax.swing.JLabel();
+        medium = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(null);
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel4.setText("Easy");
-        jPanel1.add(jLabel4);
-        jLabel4.setBounds(80, 80, 55, 29);
+        Hard.setLabelFor(Hard);
+        Hard.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HardMouseClicked(evt);
+            }
+        });
+        jPanel1.add(Hard);
+        Hard.setBounds(400, 0, 301, 0);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel1.setText("Difficulty");
-        jLabel1.setToolTipText("");
+        Easy.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EasyMouseClicked(evt);
+            }
+        });
+        jPanel1.add(Easy);
+        Easy.setBounds(0, 0, 220, 210);
+
+        medium.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mediumMouseClicked(evt);
+            }
+        });
+        jPanel1.add(medium);
+        medium.setBounds(-10, 240, 660, 170);
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(230, 40, 166, 44);
-
-        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel1.setBounds(0, 0, 270, 420);
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(-160, -280, 1560, 1030);
+        jLabel2.setBounds(250, 0, 250, 420);
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(410, 0, 250, 420);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -65,7 +82,26 @@ public class First_Difficulty extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void EasyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EasyMouseClicked
+        // TODO add your handling code here:
+        new First_Easy_Level().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_EasyMouseClicked
+
+    private void HardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HardMouseClicked
+        // TODO add your handling code here:
+        new First_Difficult_Level().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_HardMouseClicked
+
+    private void mediumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mediumMouseClicked
+        // TODO add your handling code here:
+        //new First_Medium_Level().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_mediumMouseClicked
 
     /**
      * @param args the command line arguments
@@ -93,6 +129,7 @@ public class First_Difficulty extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(First_Difficulty.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -103,9 +140,12 @@ public class First_Difficulty extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Easy;
+    private javax.swing.JLabel Hard;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel medium;
     // End of variables declaration//GEN-END:variables
 }

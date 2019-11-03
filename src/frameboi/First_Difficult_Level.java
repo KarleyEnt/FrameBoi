@@ -5,6 +5,14 @@
  */
 package frameboi;
 
+import java.awt.Color;
+import java.awt.Point;
+import java.util.Timer;
+import java.util.TimerTask;
+import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
+import javax.swing.border.Border;
+
 /**
  *
  * @author Anant
@@ -14,8 +22,52 @@ public class First_Difficult_Level extends javax.swing.JFrame {
     /**
      * Creates new form First_Difficult_Level
      */
+    
+    int i = 0,itemsLeft = 4, ScoreV = 100;
+    
+    First_Login f_l = new First_Login();
+    
+    Border border = BorderFactory.createLineBorder(Color.yellow, 2);
+ 
+    Timer timer = new Timer();
+    
+    int CoinsL = 2, KeyL = 1, TrophyL = 1, diamondL = 1, necklaceL=1;
+    
     public First_Difficult_Level() {
         initComponents();
+        
+         TimerTask task;
+        task = new TimerTask()
+        {
+            public void run()
+            {
+                if(i==100 || itemsLeft == 0)
+                {
+                    timer.cancel();
+                    timer.purge();
+                    JOptionPane.showMessageDialog(null,"Score = " + ScoreV);
+                }
+                else{
+                    i++;
+                    jTextField1.setText(Integer.toString(i));
+                    Time_Bar.setValue(i);
+                    if(ScoreV==0)
+                    {
+                        timer.cancel();
+                        timer.purge();
+                        JOptionPane.showMessageDialog(null,"Score = " + ScoreV);                        
+                        Score_Text.setText(Integer.toString(ScoreV));
+                    }
+                    else
+                    {
+                        ScoreV = ScoreV - 1;
+                        Score_Text.setText(Integer.toString(ScoreV));
+                    }
+                }
+            }
+        };
+        timer.scheduleAtFixedRate(task, 2000, 1000);
+        
     }
 
     /**
@@ -36,15 +88,21 @@ public class First_Difficult_Level extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         Score_Text = new javax.swing.JTextField();
+        Time_Bar = new javax.swing.JProgressBar();
+        playButton = new javax.swing.JButton();
+        BlueScreen = new javax.swing.JLabel();
+        diamond = new javax.swing.JLabel();
+        Necklace = new javax.swing.JLabel();
         Key = new javax.swing.JLabel();
         trophy = new javax.swing.JLabel();
         Coins_Two = new javax.swing.JLabel();
         Coins = new javax.swing.JLabel();
         Background = new javax.swing.JLabel();
-        Time_Bar = new javax.swing.JProgressBar();
         CoinsBox = new javax.swing.JCheckBox();
         HandBox = new javax.swing.JCheckBox();
         KeyBox = new javax.swing.JCheckBox();
+        diamondBox = new javax.swing.JCheckBox();
+        necklaceBox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -111,6 +169,44 @@ public class First_Difficult_Level extends javax.swing.JFrame {
         jPanel1.add(jPanel2);
         jPanel2.setBounds(0, 480, 660, 60);
 
+        Time_Bar.setName("Time_Bar"); // NOI18N
+        Time_Bar.setStringPainted(true);
+        jPanel1.add(Time_Bar);
+        Time_Bar.setBounds(-4, -6, 660, 70);
+
+        playButton.setText("Play");
+        playButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                playButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(playButton);
+        playButton.setBounds(260, 250, 110, 25);
+
+        BlueScreen.setIcon(new javax.swing.ImageIcon("E:\\Downloads\\blueScreen.jpg")); // NOI18N
+        jPanel1.add(BlueScreen);
+        BlueScreen.setBounds(-10, -10, 660, 580);
+
+        diamond.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frameboi/diamond(1).png"))); // NOI18N
+        diamond.setAlignmentX(0.7F);
+        diamond.setAlignmentY(0.3F);
+        diamond.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                diamondMouseClicked(evt);
+            }
+        });
+        jPanel1.add(diamond);
+        diamond.setBounds(295, 455, 16, 16);
+
+        Necklace.setIcon(new javax.swing.ImageIcon("E:\\Downloads\\necklace.png")); // NOI18N
+        Necklace.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                NecklaceMouseClicked(evt);
+            }
+        });
+        jPanel1.add(Necklace);
+        Necklace.setBounds(380, 200, 30, 40);
+
         Key.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frameboi/key.png"))); // NOI18N
         Key.setName("Key"); // NOI18N
         Key.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -119,7 +215,7 @@ public class First_Difficult_Level extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Key);
-        Key.setBounds(220, 380, 20, 30);
+        Key.setBounds(580, 364, 20, 30);
 
         trophy.setIcon(new javax.swing.ImageIcon("E:\\Downloads\\trophy.png")); // NOI18N
         trophy.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -150,14 +246,9 @@ public class First_Difficult_Level extends javax.swing.JFrame {
         jPanel1.add(Coins);
         Coins.setBounds(170, 450, 16, 16);
 
-        Background.setIcon(new javax.swing.ImageIcon("E:\\Downloads\\dragonTreasure(1).jpg")); // NOI18N
+        Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frameboi/dragonTreasure(1).jpg"))); // NOI18N
         jPanel1.add(Background);
         Background.setBounds(0, 60, 650, 420);
-
-        Time_Bar.setName("Time_Bar"); // NOI18N
-        Time_Bar.setStringPainted(true);
-        jPanel1.add(Time_Bar);
-        Time_Bar.setBounds(-4, -6, 660, 70);
 
         CoinsBox.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         CoinsBox.setText("Coins");
@@ -168,10 +259,16 @@ public class First_Difficult_Level extends javax.swing.JFrame {
         });
 
         HandBox.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        HandBox.setText("Hand Bag");
+        HandBox.setText("Trophy");
 
         KeyBox.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         KeyBox.setText("Key");
+
+        diamondBox.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        diamondBox.setText("Diamond");
+
+        necklaceBox.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        necklaceBox.setText("Necklace");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -183,34 +280,43 @@ public class First_Difficult_Level extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(CoinsBox)
-                .addGap(158, 158, 158)
+                .addGap(36, 36, 36)
                 .addComponent(HandBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(diamondBox)
+                .addGap(39, 39, 39)
                 .addComponent(KeyBox)
-                .addGap(53, 53, 53))
+                .addGap(56, 56, 56)
+                .addComponent(necklaceBox)
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CoinsBox)
+                    .addComponent(HandBox)
+                    .addComponent(diamondBox)
                     .addComponent(KeyBox)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(CoinsBox)
-                        .addComponent(HandBox))))
+                    .addComponent(necklaceBox))
+                .addGap(9, 9, 9))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void SolutionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SolutionActionPerformed
         ScoreV = 0;
         Score_Text.setText("0");
-        H_Bag.setBorder(border);
+        trophy.setBorder(border);
         Key.setBorder(border);
         Coins.setBorder(border);
         Coins_Two.setBorder(border);
+        diamond.setBorder(border);
+        Necklace.setBorder(border);
     }//GEN-LAST:event_SolutionActionPerformed
 
     private void HintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HintActionPerformed
@@ -221,7 +327,7 @@ public class First_Difficult_Level extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        f_l.setVisible(true);
+        new First_Difficulty().setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -238,7 +344,7 @@ public class First_Difficult_Level extends javax.swing.JFrame {
         KeyL--;
         Key.setVisible(false);
         itemsLeft--;
-        ScoreV = ScoreV + 50;
+        ScoreV = ScoreV + 100;
         Score_Text.setText(Integer.toString(ScoreV));
         if(KeyL==0)
         {KeyBox.setSelected(true);}
@@ -249,7 +355,7 @@ public class First_Difficult_Level extends javax.swing.JFrame {
         CoinsL--;
         Coins_Two.setVisible(false);
         itemsLeft--;
-        ScoreV = ScoreV + 50;
+        ScoreV = ScoreV + 100;
         Score_Text.setText(Integer.toString(ScoreV));
         if(CoinsL==0)
         {CoinsBox.setSelected(true);}
@@ -260,7 +366,7 @@ public class First_Difficult_Level extends javax.swing.JFrame {
         CoinsL--;
         Coins.setVisible(false);
         itemsLeft--;
-        ScoreV = ScoreV + 50;
+        ScoreV = ScoreV + 100;
         Score_Text.setText(Integer.toString(ScoreV));
         if(CoinsL==0)
         {CoinsBox.setSelected(true);}
@@ -272,7 +378,99 @@ public class First_Difficult_Level extends javax.swing.JFrame {
 
     private void trophyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_trophyMouseClicked
         // TODO add your handling code here:
+        TrophyL--;
+        trophy.setVisible(false);
+        itemsLeft--;
+        ScoreV = ScoreV + 100;
+        Score_Text.setText(Integer.toString(ScoreV));
+        if(TrophyL==0)
+        {HandBox.setSelected(true);}
     }//GEN-LAST:event_trophyMouseClicked
+
+    private void diamondMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_diamondMouseClicked
+        // TODO add your handling code here:
+        diamondL--;
+        diamond.setVisible(false);
+        itemsLeft--;
+        ScoreV = ScoreV + 100;
+        Score_Text.setText(Integer.toString(ScoreV));
+        if(diamondL==0)
+        {diamondBox.setSelected(true);}
+    }//GEN-LAST:event_diamondMouseClicked
+
+    private void NecklaceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NecklaceMouseClicked
+        // TODO add your handling code here:
+        necklaceL--;
+        Necklace.setVisible(false);
+        itemsLeft--;
+        ScoreV = ScoreV + 100;
+        Score_Text.setText(Integer.toString(ScoreV));
+        if(necklaceL==0)
+        {necklaceBox.setSelected(true);}
+        
+    }//GEN-LAST:event_NecklaceMouseClicked
+
+    private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playButtonActionPerformed
+        // TODO add your handling code here:        
+        Point pt[] = new Point[5];
+        
+        pt[0] = Coins.getLocation();
+        pt[1] = Key.getLocation();
+        pt[2] = diamond.getLocation();
+        pt[3] = trophy.getLocation();
+        pt[4] = Necklace.getLocation();
+        
+        
+        double randd = (Math.random()*(1+3));
+        int randi = (int)(Math.round(randd));
+        
+        System.out.println(randi);
+        
+        if(randi==0)
+        {
+        Coins.setLocation(pt[randi+1]);
+        Key.setLocation(pt[randi+2]);
+        diamond.setLocation(pt[randi+3]);
+        trophy.setLocation(pt[randi+4]);
+        Necklace.setLocation(pt[randi]);
+        }
+        else if(randi==1)
+        {
+        Coins.setLocation(pt[randi+1]);
+        Key.setLocation(pt[randi+2]);
+        diamond.setLocation(pt[randi+3]);
+        trophy.setLocation(pt[randi]);
+        Necklace.setLocation(pt[randi+1]);
+        }
+        else if(randi==2)
+        {
+        Coins.setLocation(pt[randi+1]);
+        Key.setLocation(pt[randi+2]);
+        diamond.setLocation(pt[randi-2]);
+        trophy.setLocation(pt[randi-1]);
+        Necklace.setLocation(pt[randi]);   
+        }
+        else if (randi==3)
+        {
+        Coins.setLocation(pt[randi+1]);
+        Key.setLocation(pt[randi-3]);
+        diamond.setLocation(pt[randi-2]);
+        trophy.setLocation(pt[randi-1]);
+        Necklace.setLocation(pt[randi]);   
+        }
+        else
+        {
+        Coins.setLocation(pt[randi-4]);
+        Key.setLocation(pt[randi-3]);
+        diamond.setLocation(pt[randi-2]);
+        trophy.setLocation(pt[randi-3]);
+        Necklace.setLocation(pt[randi]);   
+        }
+        
+        
+        BlueScreen.setVisible(false);
+        playButton.setVisible(false);
+    }//GEN-LAST:event_playButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -311,6 +509,7 @@ public class First_Difficult_Level extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;
+    private javax.swing.JLabel BlueScreen;
     private javax.swing.JLabel Coins;
     private javax.swing.JCheckBox CoinsBox;
     private javax.swing.JLabel Coins_Two;
@@ -318,15 +517,20 @@ public class First_Difficult_Level extends javax.swing.JFrame {
     private javax.swing.JButton Hint;
     private javax.swing.JLabel Key;
     private javax.swing.JCheckBox KeyBox;
+    private javax.swing.JLabel Necklace;
     private javax.swing.JTextField Score_Text;
     private javax.swing.JButton Solution;
     private javax.swing.JProgressBar Time_Bar;
+    private javax.swing.JLabel diamond;
+    private javax.swing.JCheckBox diamondBox;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JCheckBox necklaceBox;
+    private javax.swing.JButton playButton;
     private javax.swing.JLabel trophy;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,11 +6,9 @@
 package frameboi;
 
 import java.awt.Color;
-import java.awt.TextField;
+import java.awt.Point;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
@@ -47,16 +45,17 @@ public class First_Easy_Level extends javax.swing.JFrame {
                 {
                     timer.cancel();
                     timer.purge();
+                    JOptionPane.showMessageDialog(null,"Score = " + ScoreV);
                 }
                 else{
                     i++;
-                    jTextField1.setText(Integer.toString(i));
+                    Time_Field.setText(Integer.toString(i));
                     Time_Bar.setValue(i);
                     if(ScoreV==0)
                     {
                         timer.cancel();
                         timer.purge();
-                        JOptionPane.showMessageDialog(null, ScoreV);                        
+                        JOptionPane.showMessageDialog(null,"Score = " + ScoreV);                        
                         Score_Text.setText(Integer.toString(ScoreV));
                     }
                     else
@@ -83,11 +82,13 @@ public class First_Easy_Level extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         Solution = new javax.swing.JButton();
         Hint = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        Home = new javax.swing.JButton();
+        Time_Field = new javax.swing.JTextField();
+        scoreTime = new javax.swing.JLabel();
+        scoreLabel = new javax.swing.JLabel();
         Score_Text = new javax.swing.JTextField();
+        playButton = new javax.swing.JButton();
+        BlueScreen = new javax.swing.JLabel();
         Key = new javax.swing.JLabel();
         Coins_Two = new javax.swing.JLabel();
         Coins = new javax.swing.JLabel();
@@ -122,33 +123,33 @@ public class First_Easy_Level extends javax.swing.JFrame {
         jPanel2.add(Hint);
         Hint.setBounds(110, 10, 79, 30);
 
-        jButton3.setText("Home");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        Home.setText("Home");
+        Home.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                HomeActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton3);
-        jButton3.setBounds(580, 10, 70, 30);
+        jPanel2.add(Home);
+        Home.setBounds(580, 10, 70, 30);
 
-        jTextField1.setText("Timer");
-        jTextField1.setName("timer_one"); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        Time_Field.setText("Timer");
+        Time_Field.setName("timer_one"); // NOI18N
+        Time_Field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                Time_FieldActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField1);
-        jTextField1.setBounds(310, 10, 70, 30);
+        jPanel2.add(Time_Field);
+        Time_Field.setBounds(310, 10, 70, 30);
 
-        jLabel2.setText("Time Elapsed :");
-        jPanel2.add(jLabel2);
-        jLabel2.setBounds(220, 10, 90, 30);
+        scoreTime.setText("Time Elapsed :");
+        jPanel2.add(scoreTime);
+        scoreTime.setBounds(220, 10, 90, 30);
 
-        jLabel1.setText("Score :");
-        jLabel1.setToolTipText("");
-        jPanel2.add(jLabel1);
-        jLabel1.setBounds(410, 16, 70, 20);
+        scoreLabel.setText("Score :");
+        scoreLabel.setToolTipText("");
+        jPanel2.add(scoreLabel);
+        scoreLabel.setBounds(410, 16, 70, 20);
 
         Score_Text.setText("Score");
         Score_Text.setName("Score_Text"); // NOI18N
@@ -162,6 +163,19 @@ public class First_Easy_Level extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(0, 480, 660, 60);
+
+        playButton.setText("Play");
+        playButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                playButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(playButton);
+        playButton.setBounds(280, 220, 79, 25);
+
+        BlueScreen.setIcon(new javax.swing.ImageIcon("E:\\Downloads\\blueScreen.jpg")); // NOI18N
+        jPanel1.add(BlueScreen);
+        BlueScreen.setBounds(-10, -10, 660, 580);
 
         Key.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frameboi/key.png"))); // NOI18N
         Key.setName("Key"); // NOI18N
@@ -192,7 +206,7 @@ public class First_Easy_Level extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Coins);
-        Coins.setBounds(30, 270, 16, 16);
+        Coins.setBounds(10, 430, 16, 16);
         Coins.getAccessibleContext().setAccessibleName("Coins");
         Coins.getAccessibleContext().setAccessibleDescription("");
 
@@ -205,7 +219,7 @@ public class First_Easy_Level extends javax.swing.JFrame {
         jPanel1.add(H_Bag);
         H_Bag.setBounds(310, 200, 64, 70);
 
-        Background.setIcon(new javax.swing.ImageIcon("C:\\Users\\anant\\Desktop\\Images\\mystery_easy.jpg")); // NOI18N
+        Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frameboi/mystery_easy.jpg"))); // NOI18N
         jPanel1.add(Background);
         Background.setBounds(0, 60, 650, 420);
 
@@ -257,17 +271,18 @@ public class First_Easy_Level extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void HomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomeActionPerformed
         // TODO add your handling code here:
-        f_l.setVisible(true);
+        new First_Difficulty().setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_HomeActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void Time_FieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Time_FieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_Time_FieldActionPerformed
 
     private void H_BagMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H_BagMouseClicked
         // TODO add your handling code here:
@@ -336,6 +351,25 @@ public class First_Easy_Level extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_CoinsBoxActionPerformed
 
+    private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playButtonActionPerformed
+        // TODO add your handling code here:
+        Point coinsLoc = Coins.getLocation();
+        Point keyLoc = Key.getLocation();
+        
+        double randd = (Math.random()*(1));
+        int randi = (int)(Math.round(randd));
+        
+        System.out.println(randi);
+        if(randi==1)
+        {Coins.setLocation(keyLoc);
+        Key.setLocation(coinsLoc);}
+        else{Coins.setLocation(coinsLoc);
+        Key.setLocation(keyLoc);}
+        System.out.println("Key = "+ Key.getLocation() + " Coin = "+ Coins.getLocation());
+        BlueScreen.setVisible(false);
+        playButton.setVisible(false);
+    }//GEN-LAST:event_playButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -374,22 +408,24 @@ public class First_Easy_Level extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;
+    private javax.swing.JLabel BlueScreen;
     private javax.swing.JLabel Coins;
     private javax.swing.JCheckBox CoinsBox;
     private javax.swing.JLabel Coins_Two;
     private javax.swing.JLabel H_Bag;
     private javax.swing.JCheckBox HandBox;
     private javax.swing.JButton Hint;
+    private javax.swing.JButton Home;
     private javax.swing.JLabel Key;
     private javax.swing.JCheckBox KeyBox;
     private javax.swing.JTextField Score_Text;
     private javax.swing.JButton Solution;
     private javax.swing.JProgressBar Time_Bar;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JTextField Time_Field;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton playButton;
+    private javax.swing.JLabel scoreLabel;
+    private javax.swing.JLabel scoreTime;
     // End of variables declaration//GEN-END:variables
 }

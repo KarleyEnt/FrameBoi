@@ -32,6 +32,8 @@ public class First_Login_Page extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         uName = new javax.swing.JTextField();
+        username = new javax.swing.JLabel();
+        passLabel = new javax.swing.JLabel();
         password = new javax.swing.JPasswordField();
         loginButton = new javax.swing.JButton();
         registerButton = new javax.swing.JButton();
@@ -41,18 +43,31 @@ public class First_Login_Page extends javax.swing.JFrame {
 
         jPanel1.setLayout(null);
 
-        uName.setText("Username");
         uName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 uNameActionPerformed(evt);
             }
         });
         jPanel1.add(uName);
-        uName.setBounds(50, 90, 180, 22);
+        uName.setBounds(160, 90, 180, 22);
 
-        password.setText("jPasswordField1");
+        username.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        username.setForeground(new java.awt.Color(255, 255, 255));
+        username.setText("Username");
+        jPanel1.add(username);
+        username.setBounds(50, 90, 90, 20);
+        username.getAccessibleContext().setAccessibleName("username");
+
+        passLabel.setBackground(new java.awt.Color(255, 255, 255));
+        passLabel.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        passLabel.setForeground(new java.awt.Color(255, 255, 255));
+        passLabel.setText("Password");
+        jPanel1.add(passLabel);
+        passLabel.setBounds(51, 170, 90, 22);
+        passLabel.getAccessibleContext().setAccessibleName("password");
+
         jPanel1.add(password);
-        password.setBounds(50, 170, 180, 22);
+        password.setBounds(160, 170, 180, 22);
 
         loginButton.setText("Login");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
@@ -61,11 +76,11 @@ public class First_Login_Page extends javax.swing.JFrame {
             }
         });
         jPanel1.add(loginButton);
-        loginButton.setBounds(50, 260, 70, 25);
+        loginButton.setBounds(50, 260, 80, 25);
 
         registerButton.setText("Register");
         jPanel1.add(registerButton);
-        registerButton.setBounds(150, 260, 79, 25);
+        registerButton.setBounds(160, 260, 80, 25);
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\anant\\Desktop\\door1.jpg")); // NOI18N
         jPanel1.add(jLabel1);
@@ -83,6 +98,7 @@ public class First_Login_Page extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void uNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uNameActionPerformed
@@ -94,7 +110,7 @@ public class First_Login_Page extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(uName.getText().contentEquals("Anant"))
         {
-           new First_Easy_Level().setVisible(true);
+           new First_Difficulty().setVisible(true);
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 
@@ -137,8 +153,10 @@ public class First_Login_Page extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton loginButton;
+    private javax.swing.JLabel passLabel;
     private javax.swing.JPasswordField password;
     private javax.swing.JButton registerButton;
     private javax.swing.JTextField uName;
+    private javax.swing.JLabel username;
     // End of variables declaration//GEN-END:variables
 }

@@ -138,7 +138,7 @@ public class First_Login_Page extends javax.swing.JFrame {
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
         
-         PreparedStatement ps;
+        PreparedStatement ps;
         ResultSet rs;
         uname = l_uname.getText();
         String pass = String.valueOf(l_pwd.getPassword());

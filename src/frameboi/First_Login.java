@@ -17,7 +17,7 @@ public class First_Login extends javax.swing.JFrame {
     public First_Login() {
         initComponents();
     }
-First_Login_Page f_l_p = new First_Login_Page();
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -85,12 +85,13 @@ First_Login_Page f_l_p = new First_Login_Page();
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        First_Login_Page f_l_p = new First_Login_Page();
         f_l_p.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
+        Admin_Login f_l_p = new Admin_Login();
         f_l_p.setVisible(true);
 
     }//GEN-LAST:event_jButton2ActionPerformed

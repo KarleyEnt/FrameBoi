@@ -17,7 +17,7 @@ public class First_Login extends javax.swing.JFrame {
     public First_Login() {
         initComponents();
     }
-First_Login_Page f_l_p = new First_Login_Page();
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,7 +45,7 @@ First_Login_Page f_l_p = new First_Login_Page();
             }
         });
         jPanel2.add(jButton1);
-        jButton1.setBounds(30, 100, 120, 25);
+        jButton1.setBounds(30, 100, 140, 30);
 
         jButton2.setText("Admin");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -54,18 +54,18 @@ First_Login_Page f_l_p = new First_Login_Page();
             }
         });
         jPanel2.add(jButton2);
-        jButton2.setBounds(30, 180, 120, 25);
+        jButton2.setBounds(30, 180, 140, 30);
 
-        jButton3.setText("Scoreboard");
+        jButton3.setText("Leaderboard");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
         jPanel2.add(jButton3);
-        jButton3.setBounds(30, 270, 120, 25);
+        jButton3.setBounds(30, 270, 150, 30);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frameboi/door1.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("/home/aakash/FrameBoi/src/frameboi/door1.jpg")); // NOI18N
         jPanel2.add(jLabel1);
         jLabel1.setBounds(0, 0, 660, 420);
 
@@ -81,22 +81,26 @@ First_Login_Page f_l_p = new First_Login_Page();
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        First_Login_Page f_l_p = new First_Login_Page();
         f_l_p.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        Admin_Login f_l_p = new Admin_Login();
         f_l_p.setVisible(true);
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        f_l_p.setVisible(true);
+        leaderboard_page frm = new leaderboard_page();
+        frm.show();
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -124,6 +128,7 @@ First_Login_Page f_l_p = new First_Login_Page();
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(First_Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

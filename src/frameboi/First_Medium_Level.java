@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -62,18 +63,14 @@ public class First_Medium_Level extends javax.swing.JFrame {
     
     public First_Medium_Level() {
         initComponents();
-        ResultSet rs = null;
-        try{
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/spykey?autoReconnect=true&useSSL=false","root","Shivneri1103");
-            Statement stm = con.createStatement();
-            rs = stm.executeQuery("SELECT * FROM medium_level ORDER BY RAND() LIMIT 1");
-        }
-        catch(Exception e)
-        {
-            JOptionPane.showMessageDialog(null,e);
-        }
-        
+        String query = "SELECT * FROM medium_level ORDER BY RAND() LIMIT 1";
+        PreparedStatement ps;
         try {
+            ps = Connection_Sql.getConnection().prepareStatement(query);
+       
+            ResultSet rs;
+            rs = ps.executeQuery();
+            
             while (rs.next()) {
                 Mat img = Imgcodecs.imread(filePath + rs.getString("back_img"), Imgcodecs.CV_LOAD_IMAGE_UNCHANGED);
                 Imgproc.cvtColor(img, img, Imgproc.COLOR_BGR2BGRA);
@@ -119,6 +116,9 @@ public class First_Medium_Level extends javax.swing.JFrame {
             {
                 if(i==100 || itemsLeft == 0)
                 {
+                    score_page frm = new score_page();
+                    String uname = First_Login_Page.getUsername();
+                    frm.calculateScore(Time_Field.getText(),ScoreV,uname,"Medium");
                     timer.cancel();
                     timer.purge();
                     JOptionPane.showMessageDialog(null,"Score = " + ScoreV);

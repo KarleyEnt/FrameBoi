@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -54,17 +55,24 @@ public class First_Easy_Level extends javax.swing.JFrame {
     Timer timer = new Timer();
     
     int CoinsL = 2, KeyL = 1, HBL = 1;
-    String filePath="C:\\Users\\MAHE\\Documents\\NetBeansProjects\\FrameBoi\\src\\frameboi\\";
+    String filePath="/home/aakash/antman/FrameBoi/src/frameboi";
     ArrayList<Mat> mat_images = new ArrayList<>();
     ArrayList<String> mat_labels = new ArrayList<>();
     ArrayList<Rect> rects = new ArrayList<>();
     
     public First_Easy_Level() {
         initComponents();
+        
+        String query = "SELECT * FROM easy_level ORDER BY RAND() LIMIT 1";
+        PreparedStatement ps;
+        
         try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/spykey?autoReconnect=true&useSSL=false", "root", "Shivneri1103");
-            Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT * FROM easy_level ORDER BY RAND() LIMIT 1");
+            
+            ps = Connection_Sql.getConnection().prepareStatement(query);
+       
+            ResultSet rs;
+            rs = ps.executeQuery();
+            
             while (rs.next()) {
                 Mat img = Imgcodecs.imread(filePath + rs.getString("back_img"), Imgcodecs.CV_LOAD_IMAGE_UNCHANGED);
                 Imgproc.resize(img, img, new Size(Background.getWidth(), Background.getHeight()));
@@ -74,8 +82,8 @@ public class First_Easy_Level extends javax.swing.JFrame {
                 Collections.shuffle(positions);
                 positions = positions.subList(0, templates.length);
                 for (int i = 0; i < positions.size(); ++i) {
-                    mat_labels.add(templates[i].split("\\.")[0]);
-                    JCheckBox cb = new JCheckBox(templates[i].split("\\.")[0]);
+                    mat_labels.add(templates[i].split("/")[0]);
+                    JCheckBox cb = new JCheckBox(templates[i].split("/")[0]);
                     jPanel3.add(cb);
                     Mat temp = Imgcodecs.imread(filePath + templates[i], Imgcodecs.CV_LOAD_IMAGE_UNCHANGED);
                     Mat oput = new Mat(img.rows(), img.cols(), img.type());
@@ -108,6 +116,9 @@ public class First_Easy_Level extends javax.swing.JFrame {
             {
                 if(i==100 || itemsLeft == 0)
                 {
+                    score_page frm = new score_page();
+                    String uname = First_Login_Page.getUsername();
+                    frm.calculateScore(Time_Field.getText(),ScoreV,uname,"Easy");
                     timer.cancel();
                     timer.purge();
                     JOptionPane.showMessageDialog(null,"Score = " + ScoreV);

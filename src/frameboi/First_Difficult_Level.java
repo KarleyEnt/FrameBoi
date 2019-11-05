@@ -14,6 +14,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -61,10 +62,16 @@ public class First_Difficult_Level extends javax.swing.JFrame {
     
     public First_Difficult_Level() {
         initComponents();
+        String query = "SELECT * FROM hard_level ORDER BY RAND() LIMIT 1";
+        PreparedStatement ps;
+        
         try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/spykey?autoReconnect=true&useSSL=false", "root", "Shivneri1103");
-            Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT * FROM hard_level ORDER BY RAND() LIMIT 1");
+            
+            ps = Connection_Sql.getConnection().prepareStatement(query);
+       
+            ResultSet rs;
+            rs = ps.executeQuery();
+            
             while (rs.next()) {
                 Mat img = Imgcodecs.imread(filePath + rs.getString("back_img"));
                 Imgproc.resize(img, img, new Size(Background.getWidth(), Background.getHeight()));
@@ -110,6 +117,9 @@ public class First_Difficult_Level extends javax.swing.JFrame {
             {
                 if(i==100 || itemsLeft == 0)
                 {
+                    score_page frm = new score_page();
+                    String uname = First_Login_Page.getUsername();
+                    frm.calculateScore(Time_Field.getText(),ScoreV,uname,"Hard");
                     timer.cancel();
                     timer.purge();
                     JOptionPane.showMessageDialog(null,"Score = " + ScoreV);

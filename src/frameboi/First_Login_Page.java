@@ -5,6 +5,13 @@
  */
 package frameboi;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Anant
@@ -31,43 +38,30 @@ public class First_Login_Page extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        uName = new javax.swing.JTextField();
-        username = new javax.swing.JLabel();
-        passLabel = new javax.swing.JLabel();
-        password = new javax.swing.JPasswordField();
+        l_uname = new javax.swing.JTextField();
+        l_pwd = new javax.swing.JPasswordField();
         loginButton = new javax.swing.JButton();
         registerButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        lihat = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(null);
 
-        uName.addActionListener(new java.awt.event.ActionListener() {
+        l_uname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                uNameActionPerformed(evt);
+                l_unameActionPerformed(evt);
             }
         });
-        jPanel1.add(uName);
-        uName.setBounds(160, 90, 180, 22);
-
-        username.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        username.setForeground(new java.awt.Color(255, 255, 255));
-        username.setText("Username");
-        jPanel1.add(username);
-        username.setBounds(50, 90, 90, 20);
-        username.getAccessibleContext().setAccessibleName("username");
-
-        passLabel.setBackground(new java.awt.Color(255, 255, 255));
-        passLabel.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        passLabel.setForeground(new java.awt.Color(255, 255, 255));
-        passLabel.setText("Password");
-        jPanel1.add(passLabel);
-        passLabel.setBounds(51, 170, 90, 22);
-        passLabel.getAccessibleContext().setAccessibleName("password");
-
-        jPanel1.add(password);
-        password.setBounds(160, 170, 180, 22);
+        jPanel1.add(l_uname);
+        l_uname.setBounds(320, 110, 180, 28);
+        jPanel1.add(l_pwd);
+        l_pwd.setBounds(320, 170, 180, 28);
 
         loginButton.setText("Login");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
@@ -76,15 +70,51 @@ public class First_Login_Page extends javax.swing.JFrame {
             }
         });
         jPanel1.add(loginButton);
-        loginButton.setBounds(50, 260, 80, 25);
+        loginButton.setBounds(290, 260, 110, 30);
 
         registerButton.setText("Register");
+        registerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerButtonActionPerformed(evt);
+            }
+        });
         jPanel1.add(registerButton);
-        registerButton.setBounds(160, 260, 80, 25);
+        registerButton.setBounds(290, 350, 110, 30);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\anant\\Desktop\\door1.jpg")); // NOI18N
+        jLabel2.setText("Username:");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(200, 120, 75, 18);
+
+        jLabel3.setText("Password:");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(200, 180, 90, 20);
+
+        lihat.setText("Show Password");
+        lihat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lihatActionPerformed(evt);
+            }
+        });
+        jPanel1.add(lihat);
+        lihat.setBounds(470, 240, 150, 24);
+
+        jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 36)); // NOI18N
+        jLabel1.setText("Login");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(0, 0, 660, 420);
+        jLabel1.setBounds(250, 30, 140, 50);
+
+        jLabel4.setText("Or");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(310, 310, 49, 18);
+
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1);
+        jButton1.setBounds(40, 30, 80, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,21 +128,78 @@ public class First_Login_Page extends javax.swing.JFrame {
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void uNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uNameActionPerformed
+    private void l_unameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_l_unameActionPerformed
         // TODO add your handling code here:
         
-    }//GEN-LAST:event_uNameActionPerformed
-
+    }//GEN-LAST:event_l_unameActionPerformed
+     static String  uname;
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
-        if(uName.getText().contentEquals("Anant"))
-        {
-           new First_Difficulty().setVisible(true);
+        
+        PreparedStatement ps;
+        ResultSet rs;
+        uname = l_uname.getText();
+        String pass = String.valueOf(l_pwd.getPassword());
+        
+        String query = "SELECT * FROM `players` WHERE `username` =? AND `password` =?";
+        
+        try {
+            ps = Connection_Sql.getConnection().prepareStatement(query);
+            
+            ps.setString(1, uname);
+            ps.setString(2, pass);
+            
+            rs = ps.executeQuery();
+            
+            if(rs.next())
+            {
+                    First_Difficulty frm = new First_Difficulty();
+                    frm.show();
+                    this.dispose();
+            }
+            else{
+                    JOptionPane.showMessageDialog(null, "Incorrect Username Or Password", "Login Failed", 2);
+                }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(First_Login_Page.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }//GEN-LAST:event_loginButtonActionPerformed
+
+    public static String getUsername()
+    {
+        return uname;
+    }
+    private void lihatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lihatActionPerformed
+        // TODO add your handling code here:
+        
+        if (lihat.isSelected()) {
+      l_pwd.setEchoChar((char)0); 
+   } else {
+      l_pwd.setEchoChar('*');
+   }
+        
+    }//GEN-LAST:event_lihatActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            // TODO add your handling code here:
+            
+            First_Login frm = new First_Login();
+            frm.show();
+            this.hide();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
+        // TODO add your handling code here:
+        //System.out.println(getClass().getResource("/frameboi/door1.jpg"));
+
+        Register_page frm = new Register_page();
+        frm.show();
+        this.hide();
+    }//GEN-LAST:event_registerButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -140,6 +227,7 @@ public class First_Login_Page extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(First_Login_Page.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -150,13 +238,16 @@ public class First_Login_Page extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPasswordField l_pwd;
+    private javax.swing.JTextField l_uname;
+    private javax.swing.JRadioButton lihat;
     private javax.swing.JButton loginButton;
-    private javax.swing.JLabel passLabel;
-    private javax.swing.JPasswordField password;
     private javax.swing.JButton registerButton;
-    private javax.swing.JTextField uName;
-    private javax.swing.JLabel username;
     // End of variables declaration//GEN-END:variables
 }

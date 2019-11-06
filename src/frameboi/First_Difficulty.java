@@ -39,7 +39,7 @@ public class First_Difficulty extends javax.swing.JFrame {
 
         jPanel1.setLayout(null);
 
-        Hard.setIcon(new javax.swing.ImageIcon("E:\\Downloads\\redHard.jpg")); // NOI18N
+        Hard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frameboi/redHard.jpg"))); // NOI18N
         Hard.setLabelFor(Hard);
         Hard.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -49,7 +49,7 @@ public class First_Difficulty extends javax.swing.JFrame {
         jPanel1.add(Hard);
         Hard.setBounds(400, 0, 301, 174);
 
-        Easy.setIcon(new javax.swing.ImageIcon("E:\\Downloads\\redEasy.jpg")); // NOI18N
+        Easy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frameboi/redEasy.jpg"))); // NOI18N
         Easy.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 EasyMouseClicked(evt);
@@ -58,7 +58,7 @@ public class First_Difficulty extends javax.swing.JFrame {
         jPanel1.add(Easy);
         Easy.setBounds(0, 0, 220, 210);
 
-        medium.setIcon(new javax.swing.ImageIcon("E:\\Downloads\\medium.png")); // NOI18N
+        medium.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frameboi/medium.png"))); // NOI18N
         medium.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mediumMouseClicked(evt);

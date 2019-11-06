@@ -82,7 +82,7 @@ public class First_Login_Page extends javax.swing.JFrame {
         jPanel1.add(registerButton);
         registerButton.setBounds(160, 260, 80, 25);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\anant\\Desktop\\door1.jpg")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frameboi/door1.jpg"))); // NOI18N
         jPanel1.add(jLabel1);
         jLabel1.setBounds(0, 0, 660, 420);
 

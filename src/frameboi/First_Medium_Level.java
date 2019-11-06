@@ -6,14 +6,18 @@
 package frameboi;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import org.opencv.core.Core;
 import org.opencv.core.Core.MinMaxLocResult;
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
@@ -320,27 +324,35 @@ public class First_Medium_Level extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Items Left: " + itemsLeft);
         
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-        Mat source=null;
+        
+        Mat source = null;
         Mat template=null;
-        String filePath="C:\\Users\\anant\\Desktop\\BulBul\\FrameBoi\\src\\frameboi";
+        String filePath="C:\\Users\\anant\\Desktop\\BulBul\\FrameBoi\\src\\frameboi\\";
         //Load image file
-        source=Imgcodecs.imread(filePath+"bedroom.png");
-        template=Imgcodecs.imread(filePath+"panties.jpg");
+        source=Imgcodecs.imread(filePath+"Screenshot.png");
+        template=Imgcodecs.imread(filePath+"panties.png");
     
         Mat outputImage=new Mat();    
+//        Icon back = Background.getIcon();
+//        BufferedImage bi = new BufferedImage(back.getIconWidth(), back.getIconHeight(), BufferedImage.TYPE_3BYTE_BGR);
+//        Mat source=new Mat(bi.getHeight(), bi.getWidth(), CvType.CV_8UC3);
+//        byte[] array = ((DataBufferByte) bi.getRaster().getDataBuffer()).getData();
+//        source.put(0,0,array);
         int machMethod=Imgproc.TM_CCOEFF;
         //Template matching method
-        Imgproc.matchTemplate(source, template, outputImage, machMethod);
- 
+        Imgproc.matchTemplate(source, template,outputImage , machMethod);
+         
+        
     
         MinMaxLocResult mmr = Core.minMaxLoc(outputImage);
         Point matchLoc=mmr.maxLoc;
         //Draw rectangle on result image
         Imgproc.rectangle(source, matchLoc, new Point(matchLoc.x + template.cols(),
                 matchLoc.y + template.rows()), new Scalar(255, 255, 255));
+        
  
         Imgcodecs.imwrite(filePath+"sonuc.jpg", source);
-        System.out.println("Complated.");
+//        System.out.println("Complated.");
     }//GEN-LAST:event_HintActionPerformed
 
     private void SolutionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SolutionActionPerformed

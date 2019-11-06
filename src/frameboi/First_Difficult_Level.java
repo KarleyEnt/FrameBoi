@@ -337,6 +337,8 @@ public class First_Difficult_Level extends javax.swing.JFrame {
                 JCheckBox cb = (JCheckBox) jPanel3.getComponent(count);
                 cb.setSelected(true);
                 itemsLeft-=1;
+                itemsLeft-=1;
+                ScoreV = ScoreV + 40;
                 break;
             }
         }  

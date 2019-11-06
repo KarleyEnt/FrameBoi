@@ -79,6 +79,7 @@ public class First_Medium_Level extends javax.swing.JFrame {
                 List<String> positions = Arrays.asList(rs.getString("positions").split(";"));
                 Collections.shuffle(positions);
                 positions = positions.subList(0, templates.length);
+                itemsLeft = positions.size();
                 for (int i = 0; i < positions.size(); ++i) {
 //                    mat_labels.add(templates[i].split("\\.")[0]);
                     JCheckBox cb = new JCheckBox(templates[i].split("\\.")[0]);
@@ -168,8 +169,10 @@ public class First_Medium_Level extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(615, 590));
-        setSize(new java.awt.Dimension(615, 590));
+        setMinimumSize(new java.awt.Dimension(640, 590));
+        setPreferredSize(new java.awt.Dimension(640, 590));
+        setResizable(false);
+        setSize(new java.awt.Dimension(640, 590));
         getContentPane().setLayout(null);
 
         jPanel2.setLayout(null);
@@ -345,6 +348,8 @@ public class First_Medium_Level extends javax.swing.JFrame {
                 JCheckBox cb = (JCheckBox) jPanel3.getComponent(count);
                 cb.setSelected(true);
                 itemsLeft-=1;
+                itemsLeft-=1;
+                ScoreV = ScoreV + 30;
                 break;
             }
         }  

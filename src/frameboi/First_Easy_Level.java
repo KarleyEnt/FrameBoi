@@ -55,7 +55,7 @@ public class First_Easy_Level extends javax.swing.JFrame {
     Timer timer = new Timer();
     
     int CoinsL = 2, KeyL = 1, HBL = 1;
-    String filePath="/home/aakash/antman/FrameBoi/src/frameboi";
+    String filePath="C:\\Users\\MAHE\\Documents\\NetBeansProjects\\FrameBoi\\src\\frameboi\\";
     ArrayList<Mat> mat_images = new ArrayList<>();
     ArrayList<String> mat_labels = new ArrayList<>();
     ArrayList<Rect> rects = new ArrayList<>();
@@ -75,12 +75,13 @@ public class First_Easy_Level extends javax.swing.JFrame {
             
             while (rs.next()) {
                 Mat img = Imgcodecs.imread(filePath + rs.getString("back_img"), Imgcodecs.CV_LOAD_IMAGE_UNCHANGED);
-                Imgproc.resize(img, img, new Size(Background.getWidth(), Background.getHeight()));
                 Imgproc.cvtColor(img, img, Imgproc.COLOR_BGR2BGRA);
+                Imgproc.resize(img, img, new Size(Background.getWidth(), Background.getHeight()));
                 String templates[] = rs.getString("temp_img").split(";");
                 List<String> positions = Arrays.asList(rs.getString("positions").split(";"));
                 Collections.shuffle(positions);
                 positions = positions.subList(0, templates.length);
+                itemsLeft = positions.size();
                 for (int i = 0; i < positions.size(); ++i) {
                     mat_labels.add(templates[i].split("/")[0]);
                     JCheckBox cb = new JCheckBox(templates[i].split("/")[0]);
@@ -304,6 +305,8 @@ public class First_Easy_Level extends javax.swing.JFrame {
                 JCheckBox cb = (JCheckBox) jPanel3.getComponent(count);
                 cb.setSelected(true);
                 itemsLeft-=1;
+                ScoreV = ScoreV + 20;
+                Score_Text.setText(Integer.toString(ScoreV));
                 break;
             }
         }  

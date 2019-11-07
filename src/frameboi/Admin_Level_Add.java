@@ -6,6 +6,8 @@
 package frameboi;
 
 import java.awt.BorderLayout;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -270,14 +272,21 @@ public class Admin_Level_Add extends javax.swing.JFrame {
         // TODO add your handling code here:
         String bImg = bImg_field.getText();
         JFrame f = new JFrame("Position");
-        f.setSize(400,400);
+       
         //frame.setLayout(new BorderLayout());
         //frame.setContentPane(new JLabel(new ImageIcon(bImg)));
         //frame.setVisible(true);
         
         try {
-            BufferedImage image = ImageIO.read(this.getClass().getResource(bImg));
-            
+        BufferedImage image = ImageIO.read(this.getClass().getResource(bImg));
+        switch (list_box.getSelectedItem().toString()) {
+            case "Easy":
+                image = resize(image, 650, 420);
+            case "Medium":
+                image = resize(image, 640, 400);
+            default:
+                image = resize(image, 680, 440);
+        }
         Insets insets = f.getInsets();
         f.setSize(image.getWidth()+insets.left+insets.right+1, image.getHeight()+insets.top+insets.bottom+1);
         JLabel find_pos = new JLabel(new ImageIcon(image));
@@ -300,7 +309,18 @@ public class Admin_Level_Add extends javax.swing.JFrame {
        // f.add(new JScrollPane(test));
         
     }//GEN-LAST:event_showImage_btnActionPerformed
+    
+    public static BufferedImage resize(BufferedImage img, int newW, int newH) {
+        Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
+        BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
 
+        Graphics2D g2d = dimg.createGraphics();
+        g2d.drawImage(tmp, 0, 0, null);
+        g2d.dispose();
+
+        return dimg;
+    }
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         

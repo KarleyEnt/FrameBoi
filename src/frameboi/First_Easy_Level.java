@@ -8,6 +8,7 @@ package frameboi;
 import static frameboi.First_Medium_Level.overlayImage;
 import java.awt.Color;
 import java.awt.Point;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.sql.Connection;
@@ -19,19 +20,24 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.EventListener;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Rect;
+import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
@@ -56,7 +62,7 @@ public class First_Easy_Level extends javax.swing.JFrame {
     
     int CoinsL = 2, KeyL = 1, HBL = 1;
     String filePath="C:\\Users\\MAHE\\Documents\\NetBeansProjects\\FrameBoi\\src\\frameboi\\";
-    ArrayList<Mat> mat_images = new ArrayList<>();
+    static ArrayList<Mat> mat_images = new ArrayList<>();
     ArrayList<String> mat_labels = new ArrayList<>();
     ArrayList<Rect> rects = new ArrayList<>();
     
@@ -67,7 +73,7 @@ public class First_Easy_Level extends javax.swing.JFrame {
         PreparedStatement ps;
         
         try {
-            
+            System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
             ps = Connection_Sql.getConnection().prepareStatement(query);
        
             ResultSet rs;
@@ -85,6 +91,10 @@ public class First_Easy_Level extends javax.swing.JFrame {
                 for (int i = 0; i < positions.size(); ++i) {
                     mat_labels.add(templates[i].split("/")[0]);
                     JCheckBox cb = new JCheckBox(templates[i].split("/")[0]);
+                    EventListener[] listeners = cb.getListeners(MouseListener.class);
+                    for (EventListener eventListener : listeners) {
+                        cb.removeMouseListener((MouseListener) eventListener);
+                    }
                     jPanel3.add(cb);
                     Mat temp = Imgcodecs.imread(filePath + templates[i], Imgcodecs.CV_LOAD_IMAGE_UNCHANGED);
                     Mat oput = new Mat(img.rows(), img.cols(), img.type());
@@ -97,11 +107,7 @@ public class First_Easy_Level extends javax.swing.JFrame {
                 }
                 Imgproc.cvtColor(img, img, Imgproc.COLOR_BGRA2BGR);
                 mat_images.add(img);
-                BufferedImage image = new BufferedImage(img.width(), img.height(), BufferedImage.TYPE_3BYTE_BGR);
-                byte[] data = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
-                img.get(0, 0, data);
-
-                Background.setIcon(new ImageIcon(image));
+                Background.setIcon(new ImageIcon(mat2Img(img, BufferedImage.TYPE_3BYTE_BGR)));
 
                 for (int i = 0; i < mat_images.size() - 1; ++i) {
                     rects.add(TemplateMatching.findMatch(img, mat_images.get(i)));
@@ -285,11 +291,22 @@ public class First_Easy_Level extends javax.swing.JFrame {
 
     private void HintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HintActionPerformed
         // TODO add your handling code here:
-              ScoreV = ScoreV - 20;
-              JOptionPane.showMessageDialog(null, "Items Left: " + itemsLeft);
+        ScoreV = ScoreV - 20;
+        Icon temp = Background.getIcon();
+        Background.setIcon(new ImageIcon(filePath + "sonuc.jpg"));
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Background.setIcon(temp);
+            }
+        }, 200);
     }//GEN-LAST:event_HintActionPerformed
 
     private void SolutionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SolutionActionPerformed
+        Background.removeAll();
+        Background.repaint();
+        Background.validate();
         ScoreV = 0;
         Score_Text.setText("0");
         Background.setIcon(new ImageIcon(filePath+"sonuc.jpg"));
@@ -307,11 +324,31 @@ public class First_Easy_Level extends javax.swing.JFrame {
                 itemsLeft-=1;
                 ScoreV = ScoreV + 20;
                 Score_Text.setText(Integer.toString(ScoreV));
+                Rect r = rects.get(count);
+                JLabel lb = new JLabel();
+                lb.setBounds(r.x, r.y, r.width, r.height);
+                lb.setBorder(border);
+                lb.setVisible(true);
+                Background.add(lb);
+                Background.repaint();
+                Background.validate();
                 break;
             }
         }  
     }//GEN-LAST:event_BackgroundMouseClicked
-
+    
+    public static BufferedImage mat2Img(Mat in, int type)
+    {
+        BufferedImage image = new BufferedImage(in.width(), in.height(), type);
+        byte[] data = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
+        in.get(0, 0, data);
+        return image;
+    } 
+    
+    public static void img2Mat(ImageIcon in, Mat out){
+        BufferedImage buffered = (BufferedImage) in.getImage();
+        out.put(0, 0, ((DataBufferByte) buffered.getRaster().getDataBuffer()).getData());
+    }
     /**
      * @param args the command line arguments
      */
@@ -338,7 +375,6 @@ public class First_Easy_Level extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(First_Easy_Level.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

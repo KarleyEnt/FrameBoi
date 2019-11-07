@@ -8,6 +8,7 @@ package frameboi;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Point;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.sql.Connection;
@@ -19,12 +20,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.EventListener;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -83,6 +86,10 @@ public class First_Medium_Level extends javax.swing.JFrame {
                 for (int i = 0; i < positions.size(); ++i) {
 //                    mat_labels.add(templates[i].split("\\.")[0]);
                     JCheckBox cb = new JCheckBox(templates[i].split("\\.")[0]);
+                    EventListener[] listeners = cb.getListeners(MouseListener.class);
+                    for (EventListener eventListener : listeners) {
+                        cb.removeMouseListener((MouseListener) eventListener);
+                    }
                     jPanel3.add(cb);
                     Mat temp = Imgcodecs.imread(filePath + templates[i], Imgcodecs.CV_LOAD_IMAGE_UNCHANGED);
                     Mat oput = new Mat(img.rows(), img.cols(), img.type());
@@ -324,13 +331,23 @@ public class First_Medium_Level extends javax.swing.JFrame {
     }//GEN-LAST:event_HomeActionPerformed
 
     private void HintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HintActionPerformed
-        // TODO add your handling code here:
         ScoreV = ScoreV - 20;
-        JOptionPane.showMessageDialog(null, "Items Left: " + itemsLeft);
+        Icon temp = Background.getIcon();
+        Background.setIcon(new ImageIcon(filePath + "sonuc.jpg"));
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Background.setIcon(temp);
+            }
+        }, 200);
         
     }//GEN-LAST:event_HintActionPerformed
 
     private void SolutionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SolutionActionPerformed
+        Background.removeAll();
+        Background.repaint();
+        Background.validate();
         ScoreV = 0;
         Score_Text.setText("0");
         Background.setIcon(new ImageIcon(filePath+"sonuc.jpg"));

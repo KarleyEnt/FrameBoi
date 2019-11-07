@@ -26,7 +26,7 @@ public class TemplateMatching {
         Rect rect = new Rect(matchLoc, new Size(template.width(), template.height()));
         Imgproc.rectangle(source, matchLoc, new Point(matchLoc.x + template.cols(), matchLoc.y + template.rows()), new Scalar(255, 255, 255), 2);
         Imgcodecs.imwrite(filePath+"sonuc.jpg", source);
-        System.out.println("Complated.");
+        System.out.println("Completed");
         return rect;
         //Draw rectangle on result image
        

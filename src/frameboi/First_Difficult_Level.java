@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.sql.Connection;
@@ -20,6 +21,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.EventListener;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -87,6 +89,10 @@ public class First_Difficult_Level extends javax.swing.JFrame {
                 itemsLeft = positions.size();
                 for (int i = 0; i < positions.size(); ++i) {
                     JCheckBox cb = new JCheckBox(templates[i].split("\\.")[0]);
+                    EventListener[] listeners = cb.getListeners(MouseListener.class);
+                    for (EventListener eventListener : listeners) {
+                        cb.removeMouseListener((MouseListener) eventListener);
+                    }
                     jPanel4.add(cb);
                     JLabel lb = new JLabel();
                     lb.setIcon(new ImageIcon(First_Difficult_Level.class.getResource(templates[i])));
@@ -103,6 +109,8 @@ public class First_Difficult_Level extends javax.swing.JFrame {
                             JCheckBox cb = (JCheckBox) jPanel4.getComponent(pos);
                             cb.setSelected(true);
                             itemsLeft -= 1;
+                            ScoreV = ScoreV + 50;
+                            Score_Text1.setText(Integer.toString(ScoreV));
                         }
                     });
                 }

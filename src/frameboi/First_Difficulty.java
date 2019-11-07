@@ -39,7 +39,7 @@ public class First_Difficulty extends javax.swing.JFrame {
 
         jPanel1.setLayout(null);
 
-        Hard.setIcon(new javax.swing.ImageIcon("E:\\Downloads\\redHard.jpg")); // NOI18N
+        Hard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frameboi/redHard.jpg"))); // NOI18N
         Hard.setLabelFor(Hard);
         Hard.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -47,9 +47,9 @@ public class First_Difficulty extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Hard);
-        Hard.setBounds(400, 0, 301, 174);
+        Hard.setBounds(350, 10, 301, 174);
 
-        Easy.setIcon(new javax.swing.ImageIcon("E:\\Downloads\\redEasy.jpg")); // NOI18N
+        Easy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frameboi/redEasy.jpg"))); // NOI18N
         Easy.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 EasyMouseClicked(evt);
@@ -58,7 +58,7 @@ public class First_Difficulty extends javax.swing.JFrame {
         jPanel1.add(Easy);
         Easy.setBounds(0, 0, 220, 210);
 
-        medium.setIcon(new javax.swing.ImageIcon("E:\\Downloads\\medium.png")); // NOI18N
+        medium.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frameboi/medium.png"))); // NOI18N
         medium.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mediumMouseClicked(evt);
@@ -66,16 +66,10 @@ public class First_Difficulty extends javax.swing.JFrame {
         });
         jPanel1.add(medium);
         medium.setBounds(-10, 240, 660, 170);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon("E:\\Downloads\\vertical-white-notepad-vector-19621512.jpg")); // NOI18N
         jPanel1.add(jLabel1);
         jLabel1.setBounds(0, 0, 270, 420);
-
-        jLabel2.setIcon(new javax.swing.ImageIcon("E:\\Downloads\\vertical-white-notepad-vector-19621512.jpg")); // NOI18N
         jPanel1.add(jLabel2);
         jLabel2.setBounds(250, 0, 250, 420);
-
-        jLabel3.setIcon(new javax.swing.ImageIcon("E:\\Downloads\\vertical-white-notepad-vector-19621512.jpg")); // NOI18N
         jPanel1.add(jLabel3);
         jLabel3.setBounds(410, 0, 250, 420);
 
@@ -97,7 +91,7 @@ public class First_Difficulty extends javax.swing.JFrame {
     private void EasyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EasyMouseClicked
         // TODO add your handling code here:
         new First_Easy_Level().setVisible(true);
-        dispose();
+        this.dispose();
     }//GEN-LAST:event_EasyMouseClicked
 
     private void HardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HardMouseClicked
@@ -137,6 +131,7 @@ public class First_Difficulty extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(First_Difficulty.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
